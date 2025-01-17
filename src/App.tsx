@@ -1,7 +1,25 @@
 import { Image, SafeAreaView, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react',
+import { currencyByCad } from './constants';
 
 export default function App() {
+
+  const[inputValue,setInputValue] = useState('');
+  const[exchangeValue,setExchangeValue] = useState('');
+  const[resultValue,setResultValue] = useState('');
+
+
+  const convert = (value,currency) => {
+    
+
+    const result = value * +inputValue;
+    return result;
+  }
+
+  const exchangeRate = () => {
+    
+  }
+
   return (
     <SafeAreaView style={styles.appContainer}>
       <View style={styles.headingTxtContainer}>
@@ -10,11 +28,11 @@ export default function App() {
       </View>
       <View style={styles.textInputContainer}>
         <Text style={styles.text}>Enter CAD</Text>
-        <TextInput style={styles.textInput} placeholder='Ex:10'></TextInput>
+        <TextInput style={styles.textInput} onChangeText={(text) => setInputValue(text)} placeholder='Ex:10'/>
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonTxt}>IND</Text>
+          <Text style={styles.buttonTxt} >USD</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button}>
           <Text style={styles.buttonTxt}>IND</Text>
