@@ -1,5 +1,5 @@
 import { Image, SafeAreaView, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react',
+import React, { useState } from 'react';
 import { currencyByCad } from './constants';
 
 export default function App() {
@@ -9,16 +9,14 @@ export default function App() {
   const[resultValue,setResultValue] = useState('');
 
 
-  const convert = (value,currency) => {
+  const convert = (value:number,currency) => {
     
-
     const result = value * +inputValue;
-    return result;
+    setResultValue(result);
+    setExchangeValue(currency);
   }
 
-  const exchangeRate = () => {
-    
-  }
+  
 
   return (
     <SafeAreaView style={styles.appContainer}>
@@ -31,37 +29,20 @@ export default function App() {
         <TextInput style={styles.textInput} onChangeText={(text) => setInputValue(text)} placeholder='Ex:10'/>
       </View>
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonTxt} >USD</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonTxt}>IND</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonTxt}>IND</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonTxt}>IND</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonTxt}>IND</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonTxt}>IND</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonTxt}>IND</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonTxt}>IND</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonTxt}>IND</Text>
-        </TouchableOpacity>
+        {currencyByCad.map((currency) => (
+          <TouchableOpacity key={currency.symbol} style={styles.button} onPress={() => convert(currency.value, currency.symbol)}>
+            <Image style={styles.buttonImg} source={{ uri: currency.flag }} />
+            <Text style={styles.buttonTxt}>
+               {currency.name}
+            </Text>
+          </TouchableOpacity>
+      ))}
+        
+        
 
       </View>
       <View style={styles.displayContainer}>
-        <Text style={styles.displayText}> Value </Text>
+        <Text style={styles.displayText}>{exchangeValue} {resultValue} </Text>
       </View>
       
 
@@ -118,7 +99,7 @@ const styles = StyleSheet.create({
 
   },
   buttonContainer : {
-    margin: 50,
+    margin: 30,
     flex:1,
     flexDirection: 'row',
     flexWrap: 'wrap',
@@ -128,18 +109,27 @@ const styles = StyleSheet.create({
   },
   button : {
     height: 40,
-    width: 100,
+    width: 110,
     backgroundColor: 'black',
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 15
+    marginTop: 15,
+    flexDirection: 'row'
+    
     
     
   },
   buttonTxt : {
     color: '#56666B',
-    fontSize: 20
+    fontSize: 17,
+    
+  },
+  buttonImg:{
+    margin:5,
+    height: 20,
+    width:20
+
   },
   displayContainer:{
     width: '60%',
