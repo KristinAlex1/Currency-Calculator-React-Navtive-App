@@ -1,22 +1,34 @@
 import { Image, SafeAreaView, StyleSheet, Text, TextInput, Touchable, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react';
 import { currencyByCad } from './constants';
+import Snackbar from 'react-native-snackbar';
 
 export default function App() {
 
-  const[inputValue,setInputValue] = useState('');
-  const[exchangeValue,setExchangeValue] = useState('');
-  const[resultValue,setResultValue] = useState('');
+  const[inputValue,setInputValue] = useState(+'');
+  const[exchangeValue,setExchangeValue] = useState(+'');
+  const[resultValue,setResultValue] = useState(+'');
 
 
   const convert = (value:number,currency) => {
     
-    const result = value * +inputValue;
-    setResultValue(result);
-    setExchangeValue(currency);
+    if (!inputValue || isNaN(inputValue)) {
+      return Snackbar.show({
+        text: 'Please enter a valid CAD value!',
+        backgroundColor: 'black',
+        textColor: 'white',
+        duration: Snackbar.LENGTH_LONG, // Default is LENGTH_SHORT
+      });
+      
+      
+    } else {
+      const result = value * +inputValue;
+      setResultValue(+result);
+      setExchangeValue(currency);
+    }
+    
   }
 
-  
 
   return (
     <SafeAreaView style={styles.appContainer}>
@@ -26,7 +38,7 @@ export default function App() {
       </View>
       <View style={styles.textInputContainer}>
         <Text style={styles.text}>Enter CAD</Text>
-        <TextInput style={styles.textInput} onChangeText={(text) => setInputValue(text)} placeholder='Ex:10'/>
+        <TextInput style={styles.textInput} onChangeText={(text) => setInputValue(+text)} placeholder='Ex:10'/>
       </View>
       <View style={styles.buttonContainer}>
         {currencyByCad.map((currency) => (
@@ -42,7 +54,7 @@ export default function App() {
 
       </View>
       <View style={styles.displayContainer}>
-        <Text style={styles.displayText}>{exchangeValue} {resultValue} </Text>
+        <Text style={styles.displayText}>{exchangeValue} {parseFloat(resultValue.toFixed(4))} </Text>
       </View>
       
 
