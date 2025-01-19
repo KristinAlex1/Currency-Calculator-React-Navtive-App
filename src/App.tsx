@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 15,
+    margin: 3,
     flexDirection: 'row',
   },
   buttonTxt: {
@@ -162,6 +162,8 @@ const styles = StyleSheet.create({
     width: 20,
   },
   displayContainer: {
+    position: 'absolute', // Keeps the container fixed
+    bottom: 100,         // Adjust based on desired position
     width: '60%',
     height: 100,
     backgroundColor: '#EEE1B3',
@@ -169,8 +171,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'center',
-    marginBottom: 150,
-    marginTop: -150,
     borderBlockColor: 'black',
     borderWidth: 10,
   },
