@@ -14,10 +14,12 @@ A React Native app for converting CAD to multiple currencies. This app features 
 
 ## Demo
 ### Screenshot
+
 ![Screenshot_20250118_230750](https://github.com/user-attachments/assets/3b7a1214-eb9a-43ea-8922-abfb47db4158)
 
 
 ### Video Recording
+
 [Currency_Converter Recording.webm](https://github.com/user-attachments/assets/5e49f083-c9bb-47d6-bfb2-cdcdbcf84913)
 ---
 
